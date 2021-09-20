@@ -23,6 +23,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ImageUrl)
+                
             </th>
             <th></th>
         </tr>
@@ -40,7 +41,8 @@
                 @Html.DisplayFor(modelItem => item.NeighborhoodId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
+                <img src="@item.ImageUrl" alt="@item.Name image" />
+              
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

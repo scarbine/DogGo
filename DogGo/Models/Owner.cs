@@ -21,6 +21,6 @@ namespace DogGo.Models
 
         public string Phone { get; set; }
 
-       
+        public Neighborhood Neighborhood { get; set; }
     }
 }

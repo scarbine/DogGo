@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DogGo.Models;
+﻿using DogGo.Models;
 using DogGo.Repositories;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace DogGo.Controllers
 {
@@ -38,7 +35,7 @@ namespace DogGo.Controllers
                 return NotFound();
             }
 
-            return View();
+            return View(owner);
         }
 
         // GET: OwnerController/Create

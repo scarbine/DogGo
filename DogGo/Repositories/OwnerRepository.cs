@@ -71,7 +71,7 @@ namespace DogGo.Repositories
                     cmd.CommandText = @"
                         SELECT Id, [Name], [Address], NeighborhoodId, Email, Phone
                         FROM Owner
-                        WHERE @id = Id;
+                        WHERE Id = @id;
                     ";
 
                     cmd.Parameters.AddWithValue("@id", id);

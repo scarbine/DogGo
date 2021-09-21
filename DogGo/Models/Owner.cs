@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DogGo.Repositories;
 
 namespace DogGo.Models
 {
+
     public class Owner
     {
         public int Id { get; set; }
@@ -19,6 +21,6 @@ namespace DogGo.Models
 
         public string Phone { get; set; }
 
-        public Neighborhood Neighborhood { get; set; }
+       
     }
 }

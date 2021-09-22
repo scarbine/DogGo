@@ -1,23 +1,26 @@
-﻿using DogGo.Models;
-using DogGo.Models.ViewModels;
-using DogGo.Repositories;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using DogGo.Models;
+using DogGo.Repositories;
+using DogGo.Models.ViewModels;
 
 namespace DogGo.Controllers
 {
-    public class WalkersController : Controller
-    {
 
+    public class WalksController : Controller
+    {
         private readonly IWalksRepository _walksRepo;
         private readonly IOwnerRepository _ownerRepo;
         private readonly IDogRepository _dogRepo;
         private readonly IWalkerRepository _walkerRepo;
 
-        public WalkersController(IWalksRepository walksRepository, IOwnerRepository ownerRepository,
-         IDogRepository dogRepository,
-        IWalkerRepository walkerRepository)
+        public WalksController(IWalksRepository walksRepository, IOwnerRepository ownerRepository,
+    IDogRepository dogRepository,
+    IWalkerRepository walkerRepository)
         {
             _walksRepo = walksRepository;
             _ownerRepo = ownerRepository;
@@ -25,20 +28,10 @@ namespace DogGo.Controllers
             _dogRepo = dogRepository;
         }
 
-        // GET: WalkersController
+        // GET: WalksControler
         public ActionResult Index()
         {
-            List<Walker> walkers = _walkerRepo.GetAllWalkers();
-            return View(walkers);
-        }
-
-        // GET: WalkersController/Details/5
-        public ActionResult Details(int id)
-        {
-            Walker walker = _walkerRepo.GetWalkerById(id);
-
-            List<Walks> walks = _walkerRepo.GetAllWalksByWalker(id);
-
+            List<Walks> walks = _walksRepo.GetAllWalks();
             WalksDetailViewModel vm = new WalksDetailViewModel()
             {
                 Owner = new Owner(),
@@ -48,13 +41,19 @@ namespace DogGo.Controllers
             return View(vm);
         }
 
-        // GET: WalkersController/Create
+        // GET: WalksControler/Details/5
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        // GET: WalksControler/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: WalkersController/Create
+        // POST: WalksControler/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -69,15 +68,13 @@ namespace DogGo.Controllers
             }
         }
 
-        // GET: WalkersController/Edit/5
+        // GET: WalksControler/Edit/5
         public ActionResult Edit(int id)
         {
-            Walker walker = _walkerRepo.GetWalkerById(id);
-            _walkerRepo.UpdateWalker(walker);
-            return View(walker);
+            return View();
         }
 
-        // POST: WalkersController/Edit/5
+        // POST: WalksControler/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -92,13 +89,13 @@ namespace DogGo.Controllers
             }
         }
 
-        // GET: WalkersController/Delete/5
+        // GET: WalksControler/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: WalkersController/Delete/5
+        // POST: WalksControler/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

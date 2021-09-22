@@ -12,7 +12,7 @@ namespace DogGo.Models
 
         public  DateTime Date { get; set; }
 
-        public int Durration { get; set; }
+        public int Duration { get; set; }
 
         public int WalkerId { get; set; }
 
@@ -21,5 +21,7 @@ namespace DogGo.Models
         public Dog Dog { get; set; }
 
         public Walker Walker { get; set; }
+
+        public Owner Owner { get; set; }
     }
 }

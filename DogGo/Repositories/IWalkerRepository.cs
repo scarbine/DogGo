@@ -15,6 +15,8 @@ namespace DogGo.Repositories
             void UpdateWalker(Walker walker);
 
             List<Walker> GetWalkersInNeighborhood(int neighborhoodId);
+
+            List<Walks> GetAllWalksByWalker(int id);
     }
 
    

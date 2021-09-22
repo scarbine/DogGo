@@ -30,21 +30,22 @@ namespace DogGo.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                      SELECT w.Id, w.Date, w.Duration, w.WalkerId, w.DogId ,wk.Name as walkerName, d.Name as dogName
-                      FROM Walks w JOIN Walker wk  ON w.WalkerId = wk.Id Join Dog d ON w.DogId = d.Id
+                      SELECT w.Id, w.Date, w.Duration, w.WalkerId, w.DogId ,wk.Name as walkerName, d.Name as dogName, o.Name AS ownerName, o.Id AS ownerId
+                      FROM Walks w Left JOIN Walker wk  ON w.WalkerId = wk.Id Left Join Dog d ON w.DogId = d.Id Left JOIN Owner o ON o.Id = d.OwnerId
                     ";
 
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     List<Walks> walks = new List<Walks>();
+                   
                     while (reader.Read())
                     {
                         Walks walk = new Walks
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             Date = reader.GetDateTime(reader.GetOrdinal("Date")),
-                            Durration = reader.GetInt32(reader.GetOrdinal("Durration")),
+                            Duration = reader.GetInt32(reader.GetOrdinal("Duration")),
                             WalkerId = reader.GetInt32(reader.GetOrdinal("WalkerId")),
                             DogId = reader.GetInt32(reader.GetOrdinal("DogId"))
                         };
@@ -65,6 +66,14 @@ namespace DogGo.Repositories
                             };
                         }
 
+                        if (!reader.IsDBNull(reader.GetOrdinal("ownerName")))
+                        {
+                            walk.Owner = new Owner()
+                            {
+                                Name = reader.GetString(reader.GetOrdinal("ownerName"))
+                            };
+                        }
+
                         walks.Add(walk);
                     }
 
@@ -74,6 +83,5 @@ namespace DogGo.Repositories
                 }
             }
         }
-
     }
 }

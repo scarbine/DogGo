@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using DogGo.Models.ViewModels;
 
 namespace DogGo.Controllers
 {
@@ -42,14 +43,14 @@ namespace DogGo.Controllers
             List<Dog> dogs = _dogRepo.GetDogsByOwnerId(owner.Id);
             List<Walker> walkers = _walkerRepo.GetWalkersInNeighborhood(owner.NeighborhoodId);
 
-            //ProfileViewModel vm = new ProfileViewModel()
-            //{
-            //    Owner = owner,
-            //    Dogs = dogs,
-            //    Walkers = walkers
-            //};
+            ProfileViewModel vm = new ProfileViewModel()
+            {
+                Owner = owner,
+                Dogs = dogs,
+                Walkers = walkers
+            };
 
-            return View(owner);
+            return View(vm);
         }
 
         // GET: OwnerController/Create

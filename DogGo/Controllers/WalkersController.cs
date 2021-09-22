@@ -60,7 +60,9 @@ namespace DogGo.Controllers
         // GET: WalkersController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Walker walker = _walkerRepo.GetWalkerById(id);
+            _walkerRepo.UpdateWalker(walker);
+            return View(walker);
         }
 
         // POST: WalkersController/Edit/5

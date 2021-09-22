@@ -66,6 +66,32 @@ namespace DogGo.Repositories
             }
         }
 
+        public void UpdateWalker(Walker walker)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            UPDATE Walker
+                            SET 
+                                [Name] = @name, 
+                                ImageUrl = @imageUrl,
+                                NeighborhoodId = @neighborhoodId
+                            WHERE Id = @id";
+
+                    cmd.Parameters.AddWithValue("@name", walker.Name);
+                    cmd.Parameters.AddWithValue("@imageUrl", walker.ImageUrl);
+                    cmd.Parameters.AddWithValue("@neighborhoodId", walker.NeighborhoodId);
+                    cmd.Parameters.AddWithValue("@id", walker.Id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public Walker GetWalkerById(int id)
         {
             using (SqlConnection conn = Connection)

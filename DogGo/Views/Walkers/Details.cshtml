@@ -5,43 +5,56 @@
 }
 
 <h1>Details</h1>
+            @{double TotalTime = 0.0;
+                foreach(Walks  walk in Model.Walks)
+                {
+                    TotalTime += walk.Duration;
+                }
+            }
 
 <div>
-    <h4>Walker</h4>
+    <h4>
+        Walker :
+        @Html.DisplayFor(model => model.Walker.Name)
+    </h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
+        @*<dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Walker.Id)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Walker.Id)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Walker.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Walker.Name)
-        </dd>
-
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Walker.ImageUrl)
-        </dt>
-        <dd class="col-sm-10">
-
+        </dd>*@
+        <dd class="col-sm-3">
             <img src="@Model.Walker.ImageUrl" alt="@Model.Walker.Name" />
         </dd>
-    </dl>
+        <dd class="col-sm-3">
+            <h3>Total Time : @(TotalTime/60) mins</h3>
+        </dd>
+        @*<div>
+        <dt class="col-sm-2">
+        </dt>*@
+        @*<dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Walker.Name)
+        </dd>*@
+        @*</div>*@
+
+        @*<dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Walker.ImageUrl)
+        </dt>*@
 
     <section class="col-lg-4 col-md-8 container mt-5">
         <h1>Completed Walks</h1>
 
         <ul class="list-group mt-4">
+
+
             @foreach (Walks walk in Model.Walks)
             {
             <div class="card-body">
                 <div>
                     <label class="font-weight-bold">Duration:</label>
-                    <span>@(walk.Duration/60) mins</span>
+                    <span>@(walk.Duration / 60) mins</span>
                 </div>
                 <div>
                     <label class="font-weight-bold">Date:</label>
@@ -51,14 +64,21 @@
                     <label class="font-weight-bold">Client:</label>
                     <span>@walk.Owner.Name</span>
                 </div>
+                <div>
+                    <label class="font-weight-bold">Dog:</label>
+                    <span>@walk.Dog.Name</span>
+                </div>
 
             </div>
             }
+
         </ul>
+               
     </section>
 
+    </dl>
 
     @*<div>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Walker.Id }) |
-        <a asp-action="Index">Back to List</a>
-    </div>*@
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Walker.Id }) |
+            <a asp-action="Index">Back to List</a>
+        </div>*@

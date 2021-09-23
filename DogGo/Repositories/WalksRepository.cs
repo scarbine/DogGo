@@ -47,8 +47,11 @@ namespace DogGo.Repositories
                             Date = reader.GetDateTime(reader.GetOrdinal("Date")),
                             Duration = reader.GetInt32(reader.GetOrdinal("Duration")),
                             WalkerId = reader.GetInt32(reader.GetOrdinal("WalkerId")),
-                            DogId = reader.GetInt32(reader.GetOrdinal("DogId"))
+                            DogId = reader.GetInt32(reader.GetOrdinal("DogId")),
+                            
                         };
+
+                        
 
                         if (!reader.IsDBNull(reader.GetOrdinal("WalkerId")))
                         {

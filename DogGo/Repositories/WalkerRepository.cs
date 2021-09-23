@@ -152,6 +152,8 @@ namespace DogGo.Repositories
                     SqlDataReader reader = cmd.ExecuteReader();
 
                         List<Walks> walks = new List<Walks>();
+                      
+                    
                     while (reader.Read())
                     {
                         Walks walk = new Walks
@@ -161,7 +163,10 @@ namespace DogGo.Repositories
                             Date = reader.GetDateTime(reader.GetOrdinal("Date")),
                             DogId = reader.GetInt32(reader.GetOrdinal("DogId")),
                             WalkerId = reader.GetInt32(reader.GetOrdinal("WalkerId")),
+                            
                         };
+
+                       
 
                         if (!reader.IsDBNull(reader.GetOrdinal("walkerName")))
                         {

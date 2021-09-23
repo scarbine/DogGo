@@ -9,11 +9,17 @@ namespace DogGo.Models.ViewModels
     {
         public Walker Walker { get; set; }
 
-        public List<Walks> Walks { get; set; } 
-        
-        //public Dog Dog { get; set; }
+        public List<Walks> Walks { get
+          
+            ; set; } 
 
-        //public Owner Owner { get; set; }
+        public double TotalDuration { get; set; }
+
+
+        public Dog Dog { get; set; }
+
+        public Owner Owner { get; set; }
+
     }
 
 

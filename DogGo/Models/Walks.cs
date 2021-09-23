@@ -18,6 +18,8 @@ namespace DogGo.Models
 
         public int DogId { get; set; }
 
+        public int TotalTime { get; set; }
+
         public Dog Dog { get; set; }
 
         public Walker Walker { get; set; }

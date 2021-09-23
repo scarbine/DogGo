@@ -34,8 +34,8 @@ namespace DogGo.Controllers
             List<Walks> walks = _walksRepo.GetAllWalks();
             WalksDetailViewModel vm = new WalksDetailViewModel()
             {
-                Owner = new Owner(),
-                Dog = new Dog(),
+                //Owner = new Owner(),
+                //Dog = new Dog(),
                 Walker = new Walker(),
             };
             return View(vm);

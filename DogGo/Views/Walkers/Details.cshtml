@@ -31,9 +31,34 @@
             <img src="@Model.Walker.ImageUrl" alt="@Model.Walker.Name" />
         </dd>
     </dl>
-    
 
-    <div>
+    <section class="col-lg-4 col-md-8 container mt-5">
+        <h1>Completed Walks</h1>
+
+        <ul class="list-group mt-4">
+            @foreach (Walks walk in Model.Walks)
+            {
+            <div class="card-body">
+                <div>
+                    <label class="font-weight-bold">Duration:</label>
+                    <span>@(walk.Duration/60) mins</span>
+                </div>
+                <div>
+                    <label class="font-weight-bold">Date:</label>
+                    <span>@walk.Date.ToString("D")</span>
+                </div>
+                <div>
+                    <label class="font-weight-bold">Client:</label>
+                    <span>@walk.Owner.Name</span>
+                </div>
+
+            </div>
+            }
+        </ul>
+    </section>
+
+
+    @*<div>
         @Html.ActionLink("Edit", "Edit", new { id = Model.Walker.Id }) |
         <a asp-action="Index">Back to List</a>
-    </div>
+    </div>*@

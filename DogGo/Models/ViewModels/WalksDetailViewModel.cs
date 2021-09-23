@@ -11,9 +11,9 @@ namespace DogGo.Models.ViewModels
 
         public List<Walks> Walks { get; set; } 
         
-        public Dog Dog { get; set; }
+        //public Dog Dog { get; set; }
 
-        public Owner Owner { get; set; }
+        //public Owner Owner { get; set; }
     }
 
 

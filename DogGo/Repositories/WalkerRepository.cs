@@ -141,7 +141,7 @@ namespace DogGo.Repositories
                 conn.Open();
                 using(SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT w.Id , w.Duration, w.Date, d.Name, o.Name, wk.Name FROM Walks w 
+                    cmd.CommandText = @"SELECT w.Id , w.Duration, w.Date, w.DogId, w.WalkerId, d.Name AS dogName, o.Name As ownerName, wk.Name AS walkerName FROM Walks w 
                                         LEFT JOIN Walker wk ON wk.id = w.WalkerId 
                                         LEFT JOIN Dog d ON d.Id = w.DogId 
                                         LEFT Join Owner o ON o.Id = d.OwnerId 
@@ -151,25 +151,47 @@ namespace DogGo.Repositories
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
-                    if (reader.Read())
-                    {
                         List<Walks> walks = new List<Walks>();
-                        //Walker walker = new Walker
-                        //{
-                        //    Id = reader.GetInt32(reader.GetOrdinal("w.Id")),
-                        //    Name = reader.GetString(reader.GetOrdinal("w.Name")),
-                        //    ImageUrl = reader.GetString(reader.GetOrdinal("w.ImageUrl")),
-                        //    NeighborhoodId = reader.GetInt32(reader.GetOrdinal("w.NeighborhoodId"))
+                    while (reader.Read())
+                    {
+                        Walks walk = new Walks
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Duration = reader.GetInt32(reader.GetOrdinal("Duration")),
+                            Date = reader.GetDateTime(reader.GetOrdinal("Date")),
+                            DogId = reader.GetInt32(reader.GetOrdinal("DogId")),
+                            WalkerId = reader.GetInt32(reader.GetOrdinal("WalkerId")),
+                        };
 
-                        //};
+                        if (!reader.IsDBNull(reader.GetOrdinal("walkerName")))
+                        {
+                            walk.Walker = new Walker
+                            {
+                                Name = reader.GetString(reader.GetOrdinal("walkerName"))
+                            };
+                        }
+
+                        if (!reader.IsDBNull(reader.GetOrdinal("dogName")))
+                        {
+                            walk.Dog = new Dog()
+                            {
+                                Name = reader.GetString(reader.GetOrdinal("dogName"))
+                            };
+                        }
+
+                        if (!reader.IsDBNull(reader.GetOrdinal("ownerName")))
+                        {
+                            walk.Owner = new Owner()
+                            {
+                                Name = reader.GetString(reader.GetOrdinal("ownerName"))
+                            };
+                        }
+
+                        walks.Add(walk);
+                    }
+                 
                         reader.Close();
                         return walks;
-                    }
-                    else
-                    {
-                        reader.Close();
-                        return null;
-                    }
                 }
             }
         }

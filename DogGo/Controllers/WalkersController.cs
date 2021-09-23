@@ -39,11 +39,14 @@ namespace DogGo.Controllers
 
             List<Walks> walks = _walkerRepo.GetAllWalksByWalker(id);
 
+  
+
             WalksDetailViewModel vm = new WalksDetailViewModel()
             {
-                Owner = new Owner(),
-                Dog = new Dog(),
-                Walker = new Walker(),
+                //Owner = new Owner(),
+                //Dog = new Dog(),
+                Walker = walker,
+                Walks = walks
             };
             return View(vm);
         }
